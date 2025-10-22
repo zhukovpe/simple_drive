@@ -3,10 +3,10 @@ module V1
     def create
       identifier = params.require(:id)
       input_data = params.require(:data)
-      decoded_data = Base64.decode64(input_data)
+      decoded_data = Base64.strict_decode64(input_data)
 
       head :ok
-    rescue StandardError => e
+    rescue ArgumentError => e
       head 400
     end
   end
