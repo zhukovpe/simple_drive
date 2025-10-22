@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  postgresql:
+    image: postgres:latest
+    # restart: always # Ensure the container restarts automatically if it stops
+    environment:
+      # POSTGRES_DB: mydatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 302963d426af0fef
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
