@@ -37,5 +37,13 @@ RSpec.describe 'POST /v1/blobs', type: :request do
       post '/v1/blobs', params: payload, headers: json_headers
       expect(response.status).to eq(200)
     end
+
+
+    context 'without json headers' do
+      specify do
+        post '/v1/blobs', params: payload
+        expect(response.status).to eq(400)
+      end
+    end
   end
 end
