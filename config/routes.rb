@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :v1 do
     post 'blobs', to: 'blobs#create'
+    get 'blobs/:id', to: 'blobs#show'
   end
 end

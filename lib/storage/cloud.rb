@@ -14,16 +14,23 @@ module Storage
       @aws_credentials = AWSCredentials.new(ENV['SIMPLE_DRIVE_S3_REGION'], ENV['SIMPLE_DRIVE_AWS_SECRET'])
     end
 
-    def save(uuid, blob)
-      uri = build_uri(uuid)
+    def save(file_name, blob)
+      uri = build_uri(file_name)
       req = Net::HTTP::Put.new(uri)
       response = perform_request(req, blob)
+      response.code == '200'
     end
 
-    def load(uuid)
-      uri = build_uri(uuid)
+    def load(file_name)
+      uri = build_uri(file_name)
       req = Net::HTTP::Get.new(uri)
       response = perform_request(req, '')
+
+      if response.code == '200'
+        response.read_body
+      else
+        raise Storage::Error
+      end
     end
 
     private
@@ -38,9 +45,9 @@ module Storage
       Net::HTTP.start(request.uri.hostname) { |http| http.request(request) }
     end
 
-    def build_uri(uuid)
+    def build_uri(file_name)
       uri = URI("https://#{bucket_name}.s3.amazonaws.com")
-      uri.path = '/' + uuid
+      uri.path = '/' + file_name
       uri
     end
 
