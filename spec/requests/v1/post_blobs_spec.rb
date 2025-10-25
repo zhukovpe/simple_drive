@@ -33,9 +33,15 @@ RSpec.describe 'POST /v1/blobs', type: :request do
   context 'with id & base64 encoded data' do
     let(:payload) { {id: '56a685b4', data: 'SGVsbG8gU2ltcGxlIFN0b3JhZ2UgV29ybGQh'}.to_json }
 
+    before do
+      allow(SecureRandom).to receive(:uuid).and_return('54d29457-b9ef-48fd-9f4e-4f8f2fe40786')
+    end
+
     specify do
-      post '/v1/blobs', params: payload, headers: json_headers
-      expect(response.status).to eq(200)
+      VCR.use_cassette('blobs') do
+        post '/v1/blobs', params: payload, headers: json_headers
+        expect(response.status).to eq(200)
+      end
     end
 
 

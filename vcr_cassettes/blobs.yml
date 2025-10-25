@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://045f9293-a568-4e7f-86fc-82d9a08edf59.s3.amazonaws.com/54d29457-b9ef-48fd-9f4e-4f8f2fe40786
+    body:
+      encoding: ASCII-8BIT
+      string: Hello Simple Storage World!
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 045f9293-a568-4e7f-86fc-82d9a08edf59.s3.amazonaws.com
+      X-Amz-Content-Sha256:
+      - 7fc79eaaf401347c1d951de2e124d415bdac232d5645b5a8e783e3791bae419a
+      X-Amz-Date:
+      - 20251025T175529Z
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<key>/20251025/us-east-1/s3/aws4_request,SignedHeaders=accept;accept-encoding;host;user-agent;x-amz-content-sha256;x-amz-date,Signature=<signature>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - 1s+nIevvGB5hdR6tj1o9xqlghiZhNpXxvuLMLlUkx56IFv2RLo5hIhnLPz7p8aSK7hTNl1dUQhw=
+      X-Amz-Request-Id:
+      - MDB54EXE3YX3T48Q
+      Date:
+      - Sat, 25 Oct 2025 17:55:30 GMT
+      X-Amz-Server-Side-Encryption:
+      - AES256
+      Etag:
+      - '"3d9ce6b19df9c7ee4968e3e70797357f"'
+      X-Amz-Checksum-Crc64nvme:
+      - TlHTJN6A0CY=
+      X-Amz-Checksum-Type:
+      - FULL_OBJECT
+      Content-Length:
+      - '0'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Sat, 25 Oct 2025 17:55:29 GMT
+- request:
+    method: get
+    uri: http://045f9293-a568-4e7f-86fc-82d9a08edf59.s3.amazonaws.com/54d29457-b9ef-48fd-9f4e-4f8f2fe40786
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - 045f9293-a568-4e7f-86fc-82d9a08edf59.s3.amazonaws.com
+      X-Amz-Content-Sha256:
+      - e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      X-Amz-Date:
+      - 20251025T182418Z
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<key>/20251025/us-east-1/s3/aws4_request,SignedHeaders=accept;accept-encoding;host;user-agent;x-amz-content-sha256;x-amz-date,Signature=<signature>
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - p5/62aDV23rJvxcFwj7XHr1PGwrgXS8lS470hDS3+l2FdVUUI9yh0daoH6T409jC4D7KnwKnQqTDWHERYQW1CxaeZPWyxNZS98DWe5wJCQI=
+      X-Amz-Request-Id:
+      - HR73C6NEFCCBZF9J
+      Date:
+      - Sat, 25 Oct 2025 18:24:20 GMT
+      Last-Modified:
+      - Sat, 25 Oct 2025 17:55:30 GMT
+      Etag:
+      - '"3d9ce6b19df9c7ee4968e3e70797357f"'
+      X-Amz-Server-Side-Encryption:
+      - AES256
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Content-Length:
+      - '27'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: Hello Simple Storage World!
+  recorded_at: Sat, 25 Oct 2025 18:24:19 GMT
+recorded_with: VCR 6.3.1
