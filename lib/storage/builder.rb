@@ -7,12 +7,12 @@ module Storage
         Storage::Cloud.new
       when 'database'
         Storage::Database.new
-      when 'file'
-        Storage::File.new
+      when 'local'
+        Storage::Local.new
       when 'ftp'
         Storage::FTP.new
       else
-        raise ArgumentError.new("Uknown storage type")
+        raise ArgumentError.new('Uknown storage type')
       end
     end
   end

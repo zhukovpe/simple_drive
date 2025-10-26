@@ -1,4 +1,4 @@
-class AddStorageInfos < ActiveRecord::Migration[8.1]
+class CreateStorageInfos < ActiveRecord::Migration[8.1]
   def change
     create_table :storage_infos do |t|
       t.string :storage_type, null: false

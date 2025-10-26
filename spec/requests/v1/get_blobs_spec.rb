@@ -1,7 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'GET /v1/blobs/:id', type: :request do
-  let(:json_headers) { { 'CONTENT_TYPE' => 'application/json' } }
+  let(:auth_token) { 'beea30fc-7241-4d23-a043-c640a6b5b322' }
+  let(:req_headers) do
+    {
+      'CONTENT_TYPE' => 'application/json',
+      'Authorization' => "Bearer #{auth_token}"
+    }
+  end
+
+  before { allow(Storage.config).to receive(:auth_token).and_return(auth_token) }
 
   context 'with valid id' do
     let(:identifier) { '56a685b4' }
@@ -23,7 +31,7 @@ RSpec.describe 'GET /v1/blobs/:id', type: :request do
     end
 
     specify do
-      get "/v1/blobs/#{identifier}", headers: json_headers
+      get "/v1/blobs/#{identifier}", headers: req_headers
 
       expect(response.status).to eq(200)
       expect(response.content_type).to include('application/json')
@@ -35,19 +43,21 @@ RSpec.describe 'GET /v1/blobs/:id', type: :request do
       expect(json_response['created_at']).to be_present
     end
 
-    # context 'without json headers' do
-    #   specify do
-    #     get "/v1/blobs/#{identifier}"
-    #     expect(response.status).to eq(400)
-    #   end
-    # end
+    context 'without auth token header' do
+      let(:req_headers) { { 'CONTENT_TYPE' => 'application/json' } }
+
+      specify do
+        get "/v1/blobs/#{identifier}", headers: req_headers
+        expect(response.status).to eq(401)
+      end
+    end
   end
 
   context 'with non-existent id' do
     let(:identifier) { 'non_existent_id' }
 
     specify do
-      get "/v1/blobs/#{identifier}", headers: json_headers
+      get "/v1/blobs/#{identifier}", headers: req_headers
       expect(response.status).to eq(404)
     end
   end

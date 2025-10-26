@@ -29,7 +29,7 @@ RSpec.describe StorageInfo, type: :model do
       end
 
       it 'accepts valid storage types' do
-        valid_types = %w[cloud database file ftp]
+        valid_types = %w[cloud database local ftp]
 
         valid_types.each do |type|
           storage_info = StorageInfo.new(storage_type: type, identifier: "test-#{type}")
@@ -70,7 +70,7 @@ RSpec.describe StorageInfo, type: :model do
     end
 
     it 'updates timestamps on save' do
-      storage_info = StorageInfo.create!(storage_type: 'file', identifier: 'timestamp-test')
+      storage_info = StorageInfo.create!(storage_type: 'local', identifier: 'timestamp-test')
       original_updated_at = storage_info.updated_at
 
       sleep(0.1) # Ensure time difference
