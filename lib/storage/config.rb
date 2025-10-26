@@ -1,6 +1,6 @@
 module Storage
   class Config
-    attr_writer :storage_type, :storage_dir
+    attr_writer :auth_token, :storage_type, :storage_dir
 
     def storage_type
       @storage_type ||= ENV['SIMPLE_DRIVE_STORAGE_TYPE'] || Storage::DEFAULT_TYPE
@@ -11,7 +11,7 @@ module Storage
     end
 
     def auth_token
-      ENV['SIMPLE_DRIVE_AUTH_TOKEN']
+      @auth_token ||= ENV['SIMPLE_DRIVE_AUTH_TOKEN']
     end
   end
 end

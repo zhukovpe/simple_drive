@@ -15,7 +15,7 @@ module V1
 
       head :ok
     rescue ArgumentError => e
-      head 400
+      head :bad_request
     end
 
     def show
