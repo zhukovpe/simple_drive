@@ -3,15 +3,10 @@ require 'net/http'
 
 module Storage
   class Cloud
-    attr_reader :bucket_name, :auth_key, :aws_credentials, :account_id
-
-    CONTENT_TYPE = 'application/octet-stream'
+    attr_reader :aws_credentials
 
     def initialize
-      @bucket_name = ENV['SIMPLE_DRIVE_S3_BUCKET']
-      @account_id = ENV['SIMPLE_DRIVE_AWS_ACCOUNT_ID']
-      @auth_key = ENV['SIMPLE_DRIVE_AWS_KEY']
-      @aws_credentials = AWSCredentials.new(ENV['SIMPLE_DRIVE_S3_REGION'], ENV['SIMPLE_DRIVE_AWS_SECRET'])
+      @aws_credentials = AWSCredentials.new(Storage.config.s3_region, Storage.config.aws_secret)
     end
 
     def save(file_name, blob)
@@ -46,13 +41,13 @@ module Storage
     end
 
     def build_uri(file_name)
-      uri = URI("https://#{bucket_name}.s3.amazonaws.com")
+      uri = URI("https://#{Storage.config.s3_bucket_name}.s3.amazonaws.com")
       uri.path = '/' + file_name
       uri
     end
 
     def authorization_header(method, path, headers, payload)
-      "AWS4-HMAC-SHA256 Credential=#{auth_key}/#{aws_credentials.scope}," +
+      "AWS4-HMAC-SHA256 Credential=#{Storage.config.aws_key}/#{aws_credentials.scope}," +
         "SignedHeaders=#{aws_credentials.signed_headers(headers)}," +
         "Signature=#{aws_credentials.signature(method, path, headers, payload)}"
     end
