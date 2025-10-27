@@ -126,4 +126,27 @@ RSpec.describe 'POST /v1/blobs', type: :request do
       end
     end
   end
+
+  context 'with ftp storage' do
+    before do
+      allow(Storage.config).to receive(:storage_type).and_return('ftp')
+    end
+
+    context 'with id & base64 encoded data' do
+      let(:payload) { {id: '56a685b4', data: 'RlRQIGZpbGUgY29udGVudA=='}.to_json }
+      let(:sftp) { double('sftp') }
+
+      before do
+        allow(SecureRandom).to receive(:uuid).and_return('test_file_name')
+        allow(Net::SFTP).to receive(:start).and_yield(sftp)
+      end
+
+      specify do
+        expect(sftp).to receive(:upload!).with(instance_of(StringIO), 'test_file_name')
+          .and_return(true)
+        post '/v1/blobs', params: payload, headers: req_headers
+        expect(response.status).to eq(200)
+      end
+    end
+  end
 end

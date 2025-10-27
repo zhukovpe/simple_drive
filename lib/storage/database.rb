@@ -5,7 +5,7 @@ module Storage
     end
 
     def load(file_name)
-      StorageData.find_by!(key: file_name)
+      StorageData.find_by!(key: file_name).blob
     end
   end
 end
