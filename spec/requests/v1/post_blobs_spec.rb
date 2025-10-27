@@ -52,13 +52,14 @@ RSpec.describe 'POST /v1/blobs', type: :request do
         allow(SecureRandom).to receive(:uuid).and_return('54d29457-b9ef-48fd-9f4e-4f8f2fe40786')
       end
 
-      specify do
-        VCR.use_cassette('blobs') do
-          post '/v1/blobs', params: payload, headers: req_headers
-          expect(response.status).to eq(200)
-        end
+      around do |example|
+        VCR.use_cassette('blobs') { example.run }
       end
 
+      specify do
+        post '/v1/blobs', params: payload, headers: req_headers
+        expect(response.status).to eq(200)
+      end
 
       context 'without json header' do
         let(:req_headers) { { 'Authorization' => "Bearer #{auth_token}" } }
@@ -101,7 +102,7 @@ RSpec.describe 'POST /v1/blobs', type: :request do
     end
   end
 
-  context 'with file storage' do
+  context 'with local storage' do
     before do
       allow(Storage.config).to receive(:storage_type).and_return('local')
     end
@@ -114,9 +115,7 @@ RSpec.describe 'POST /v1/blobs', type: :request do
         allow(SecureRandom).to receive(:uuid).and_return('a07a7731-6977-49d5-9bba-dad47ba36e89')
       end
 
-      after do
-        File.delete(file_path) if File.exist?(file_path)
-      end
+      after { File.delete(file_path) if File.exist?(file_path) }
 
       specify do
         post '/v1/blobs', params: payload, headers: req_headers
