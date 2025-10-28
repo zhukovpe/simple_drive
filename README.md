@@ -2,7 +2,7 @@
 
 A Ruby on Rails REST API application that provides a unified interface for storing and retrieving blobs (files/data) using multiple storage backends including Amazon S3, PostgreSQL database, local filesystem, and FTP.
 
-For requirements details check [requirements](docs/requirements)
+For requirements details check [requirements](docs/requirements.md)
 
 ## Installation
 
