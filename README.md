@@ -9,46 +9,23 @@ For requirements details check [requirements](docs/requirements)
 ### Prerequisites
 
 - Ruby 3.4.7 or compatible
-- PostgreSQL database
+- PostgreSQL database (docker setup [guide](docs/postgresql.md))
 - (optional) Docker and Docker Compose (for running PostgreSQL)
 
 ### Setup Instructions
 
-1. **Start PostgreSQL using Docker:**
-   ```bash
-   docker compose pull
-   docker compose up -d postgresql
-   ```
-
-2. **Configure PostgreSQL user (if needed):**
-
-   connect to container
-   ```bash
-   docker exec -it simple_drive-postgresql-1 bash
-   ```
-   add config to allow external connections
-   ```bash
-   echo "host all all all md5" >> /var/lib/postgresql/data/18/docker/pg_hba.conf
-   ```
-   create user
-   ```
-   psql -U admin
-   create role postgres with login createdb password 'postgres';
-   ```
-   Restart the PostgreSQL container to apply changes.
-
-3. **Install Ruby dependencies:**
+1. **Install dependencies**
    ```bash
    bundle install
    ```
 
-4. **Set up the database:**
+4. **Set up the database**
    ```bash
    bundle exec rails db:create
    bundle exec rails db:migrate
    ```
 
-5. **Start the server:**
+5. **Start the server**
    ```bash
    bundle exec rails server
    ```
