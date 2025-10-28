@@ -112,6 +112,7 @@ RSpec.describe 'GET /v1/blobs/:id', type: :request do
       specify do
         get "/v1/blobs/#{identifier}", headers: req_headers
         expect(response.status).to eq(401)
+        expect(response.body).to be_empty
       end
     end
   end
@@ -122,6 +123,7 @@ RSpec.describe 'GET /v1/blobs/:id', type: :request do
     specify do
       get "/v1/blobs/#{identifier}", headers: req_headers
       expect(response.status).to eq(404)
+      expect(JSON.parse(response.body)).to eq({'error' => "File with id #{identifier} not found"})
     end
   end
 end

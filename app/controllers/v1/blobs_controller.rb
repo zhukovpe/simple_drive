@@ -34,6 +34,8 @@ module V1
       }
 
       render json: blob_hash
+    rescue ActiveRecord::RecordNotFound => e
+      render(status: 404, json: { error: "File with id #{identifier} not found" })
     end
 
     private
