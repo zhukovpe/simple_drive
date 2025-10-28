@@ -78,6 +78,22 @@ RSpec.describe 'POST /v1/blobs', type: :request do
           expect(response.status).to eq(401)
         end
       end
+
+      context 'with existing id' do
+        before do
+          StorageInfo.create!(
+            identifier: '56a685b4',
+            storage_type: 'cloud',
+            key: '54d29457-b9ef-48fd-9f4e-4f8f2fe40786'
+          )
+        end
+
+        specify do
+          perform_request
+          expect(response.status).to eq(400)
+          expect(JSON.parse(response.body)).to eq({ 'error' => 'Id must be unique' })
+        end
+      end
     end
   end
 

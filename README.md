@@ -90,7 +90,7 @@ Authorization: Bearer <your-auth-token>
 
 **Request:**
 ```bash
-curl -X POST http://localhost:3000/v1/blobs \
+curl -v POST http://localhost:3000/v1/blobs \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer your-auth-token" \
   -d '{
@@ -121,7 +121,7 @@ curl -X POST http://localhost:3000/v1/blobs \
 
 **Request:**
 ```bash
-curl -X GET http://localhost:3000/v1/blobs/my-unique-identifier \
+curl -v GET http://localhost:3000/v1/blobs/my-unique-identifier \
   -H "Authorization: Bearer your-auth-token"
 ```
 

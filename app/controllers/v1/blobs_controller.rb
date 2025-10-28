@@ -16,6 +16,8 @@ module V1
       head :ok
     rescue ArgumentError => e
       head :bad_request
+    rescue ActiveRecord::RecordNotUnique => e
+      render(status: 400, json: { error: 'Id must be unique' })
     end
 
     def show
