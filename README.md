@@ -18,13 +18,21 @@ For requirements details check [requirements](docs/requirements)
    bundle install
    ```
 
-4. **Set up the database**
+2. **Set up the database**
    ```bash
    bundle exec rails db:create
    bundle exec rails db:migrate
    ```
 
-5. **Start the server**
+3. **Add configuration**
+
+   See `.env.sample` for example of environment variables configuration or check [configuration](#configuration) section for details.
+   For "dotenv" usage just copy and put you values in:
+   ```
+   cp .env.sample .env
+   ```
+
+4. **Start the server**
    ```bash
    bundle exec rails server
    ```
@@ -44,7 +52,6 @@ The application have to be configured using environment variables.
 - `SIMPLE_DRIVE_AWS_KEY`: AWS access key ID
 - `SIMPLE_DRIVE_AWS_SECRET`: AWS secret access key
 - `SIMPLE_DRIVE_S3_REGION`: AWS region (e.g., `us-east-1`)
-- `SIMPLE_DRIVE_AWS_ACCOUNT_ID`: AWS account ID (optional, used for bucket URL)
 
 #### Local File System Storage
 - `SIMPLE_DRIVE_STORAGE_TYPE=local`
@@ -55,8 +62,6 @@ The application have to be configured using environment variables.
 - `SIMPLE_DRIVE_FTP_HOST`: FTP server hostname
 - `SIMPLE_DRIVE_FTP_USER`: FTP username
 - `SIMPLE_DRIVE_FTP_PASSWORD`: FTP password
-
-See `.env.sample` for example of environments variable configuration.
 
 ## Running Tests
 
