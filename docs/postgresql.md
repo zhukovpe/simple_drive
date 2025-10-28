@@ -11,22 +11,21 @@
 
 ## Configure PostgreSQL
 
-  1. Connect to container
+Check the connection, if it works, then there is no need to configure.
+```bash
+psql -U postgres -h localhost
+```
+
+1. Connect to container
     ```bash
     docker exec -it simple_drive-postgresql-1 bash
     ```
-
-  2. Add config to allow external connections
+2. Add config to allow external connections
     ```bash
     echo "host all all all md5" >> /var/lib/postgresql/18/docker/pg_hba.conf
     ```
-  3. Restart the PostgreSQL container to apply changes
-    ```
+3. Restart the PostgreSQL container to apply changes
+    ```bash
     docker compose down
     docker compose up -d postgresql
     ```
-    Ensure connection outside of container
-    ```
-    psql -U postgres -h localhost
-    ```
-
