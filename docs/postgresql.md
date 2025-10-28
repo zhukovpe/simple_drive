@@ -1,4 +1,4 @@
-# PostgeSQL setup guide
+# PostgreSQL setup guide
 
 1. **Install Docker**
    https://docs.docker.com/get-started/get-docker/

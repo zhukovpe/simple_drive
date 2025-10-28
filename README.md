@@ -10,7 +10,6 @@ For requirements details check [requirements](docs/requirements)
 
 - Ruby 3.4.7 or compatible
 - PostgreSQL database (docker setup [guide](docs/postgresql.md))
-- (optional) Docker and Docker Compose (for running PostgreSQL)
 
 ### Setup Instructions
 
