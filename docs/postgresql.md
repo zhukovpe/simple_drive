@@ -1,27 +1,32 @@
 # PostgreSQL setup guide
 
-1. **Install Docker**
+## Install Docker
    https://docs.docker.com/get-started/get-docker/
 
-2. **Start PostgreSQL using Docker**
+## Start PostgreSQL using Docker
    ```bash
    docker compose pull
    docker compose up -d postgresql
    ```
 
-3. **Configure PostgreSQL**
+## Configure PostgreSQL
 
-   connect to container
-   ```bash
-   docker exec -it simple_drive-postgresql-1 bash
-   ```
-   add config to allow external connections
-   ```bash
-   echo "host all all all md5" >> /var/lib/postgresql/data/18/docker/pg_hba.conf
-   ```
-   create user
-   ```
-   psql -U admin
-   create role postgres with login createdb password 'postgres';
-   ```
-   Restart the PostgreSQL container to apply changes.
+  1. Connect to container
+    ```bash
+    docker exec -it simple_drive-postgresql-1 bash
+    ```
+
+  2. Add config to allow external connections
+    ```bash
+    echo "host all all all md5" >> /var/lib/postgresql/18/docker/pg_hba.conf
+    ```
+  3. Restart the PostgreSQL container to apply changes
+    ```
+    docker compose down
+    docker compose up -d postgresql
+    ```
+    Ensure connection outside of container
+    ```
+    psql -U postgres
+    ```
+
