@@ -5,14 +5,14 @@ module Storage
   class FTP
     def save(file_name, blob)
       file = StringIO.new(blob)
-      Net::SFTP.start(ftp_host, ftp_user, password: ftp_password) do |sftp|
+      Net::SFTP.start(ftp_host, ftp_user, password: ftp_password, keys_only: true) do |sftp|
         sftp.upload!(file, file_name)
       end
     end
 
     def load(file_name)
       blob = StringIO.new
-      Net::SFTP.start(ftp_host, ftp_user, password: ftp_password) do |sftp|
+      Net::SFTP.start(ftp_host, ftp_user, password: ftp_password, keys_only: true) do |sftp|
         sftp.download!(file_name, blob)
       end
 
