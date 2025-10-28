@@ -27,6 +27,6 @@
     ```
     Ensure connection outside of container
     ```
-    psql -U postgres
+    psql -U postgres -h localhost
     ```
 
